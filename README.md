@@ -38,4 +38,3 @@ Safely share your secrets in chats, emails, and social networks. Never send your
 
 Everyone interacting in the privtext project's codebases, issue trackers, chat rooms, and mailing lists is expected to
 follow the [PSF Code of Conduct](https://github.com/pypa/.github/blob/main/CODE_OF_CONDUCT.md).
-нит
