@@ -1,6 +1,33 @@
 # privtext-python
 
-A command line utility to create private texts on privtext.com
+A command line utility to create private text messages on privtext.com
+
+# Install
+
+```bash
+pip install privtext
+```
+
+# Use
+
+Example shell command:
+
+```bash
+privtext "Hello world"
+```
+
+Will encrypt the text "Hello world" and save on server, a one-time URL will be displayed:
+```
+https://privtext.com/hJwMs9#RPQxSwqPaaR4tJEX
+```
+
+Open the link, the text "hello world" will be decrypted and displayed, the record on the server will be deleted immedately.
+
+# Use cases:
+
+Securely your secrets in chats, emails, and social networks.
+
+# Links
 
  - [Installation and documentation] (https://privtext.com/soft.html)
  - [Issues](https://github.com/privtext/privtext-python/issues)
