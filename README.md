@@ -1,6 +1,6 @@
 # privtext-python
 
-A command line utility to create private text messages on privtext.com
+A command line utility to create private text messages on privtext.com. A must have utility for sys admins.
 
 # Install
 
