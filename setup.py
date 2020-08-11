@@ -10,7 +10,7 @@ except ImportError:
 
 setup(
     name='privtext',
-    version='2.0.1',
+    version='2.1.0',
     
     description='A tool for creating create your private',
     author='Privtext Tech.',

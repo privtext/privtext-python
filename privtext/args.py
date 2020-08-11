@@ -40,7 +40,7 @@ def get_args(args=None):
   args = argv_parser.parse_args(args=args)
 
   if args.verbose:
-    print("Version 2.0.1. Built by Aug 11 2020 12:40 GMT")
+    print("Version 2.1.0. Built by Aug 11 2020 17:30 GMT")
     # print("Please, press [Enter] for exit...")
     # cross_input()
     sys.exit(0)
