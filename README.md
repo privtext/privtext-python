@@ -23,13 +23,13 @@ https://privtext.com/hJwMs9#RPQxSwqPaaR4tJEX
 
 Open the link, the text "hello world" will be decrypted and displayed, the record on the server will be deleted immedately.
 
-# Use cases:
+# Why?
 
-Share your secrets in chats, emails, and social networks.
+Safely share your secrets in chats, emails, and social networks. Never send your passwords in plain text, the logs are left on servers, your desktop. Make sure your chat logs do not compromise your secrets.
 
 # Links
 
- - [Installation and documentation] (https://privtext.com/soft.html)
+ - [Installation and documentation](https://privtext.com/soft.html)
  - [Issues](https://github.com/privtext/privtext-python/issues)
  - [PyPI](https://pypi.org/project/privtext)
  - [Github](https://github.com/privtext/privtext-python)
