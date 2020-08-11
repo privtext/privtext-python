@@ -31,8 +31,8 @@ def run(args=None):
     private.send()
     private.printout()
     
-    print("Please, press [Enter] for exit...")
-    cross_input()
+    # print("Please, press [Enter] for exit...")
+    # cross_input()
 
   else:
     print('Only for console/terminal')

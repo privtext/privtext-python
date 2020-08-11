@@ -38,15 +38,15 @@ def get_args(args=None):
   args = argv_parser.parse_args(args=args)
 
   if args.verbose:
-    print("Version 2.0. Built by Jul 20 2020 13:50 GMT")
+    print("Version 2.0.1. Built by Aug 11 2020 12:40 GMT")
     # print("Please, press [Enter] for exit...")
     # cross_input()
     sys.exit(0)
 
   if ((not args.file is None) and os.path.exists(args.file)) and len(args.text) > 0:
     print("* WARNING: You must use one from specified types: only by `text` or only by `file`. Look to help (--help, -h) for more info.")
-    print("Please, press [Enter] for exit...")
-    cross_input()
+    # print("Please, press [Enter] for exit...")
+    # cross_input()
     sys.exit(-1)
   elif not ((not args.file is None) and os.path.exists(args.file)) and len(args.text) == 0:
     print("You run programm like double click or pressed `Enter`.\nFor more detaile run from terminal (command line) `privtext -h` or `privtext --help`\n")
