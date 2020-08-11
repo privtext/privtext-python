@@ -25,7 +25,7 @@ Open the link, the text "hello world" will be decrypted and displayed, the recor
 
 # Use cases:
 
-Securely your secrets in chats, emails, and social networks.
+Share your secrets in chats, emails, and social networks.
 
 # Links
 
