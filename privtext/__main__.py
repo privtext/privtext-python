@@ -18,12 +18,12 @@ def run(args=None):
   if os.isatty(sys.stdout.fileno()):
 
     private = PrivateText(keysize=args.keysize, password=args.password, timelive=args.lifetime, email=args.email, debug_mode=_TEST_MODE)
+    private.set('split_lines', args.split_lines)
 
     if len(args.text) > 0:
       private.set('text', args.text)
     elif not args.file is None:
       private.set('inputfile', args.file)
-      private.set('file_by_rows', args.file_by_rows)
 
     if not args.outfile is None:
       private.set('outfile', args.outfile)

@@ -25,9 +25,11 @@ def get_args(args=None):
             It must be incapsulate by \" or \'\n\
             -------------------------"""),
             add_help=True)
-  argv_parser.add_argument("-t", "--text", action="store", metavar='SOME TEXT', dest='text', default='', help="Run script with your text.")
+  argv_parser.add_argument("-t", "--text", action="store", metavar='SOME TEXT', dest='text', default='', help="Run script with your text.")  
   argv_parser.add_argument("-f", "--file", action="store", metavar='FILE PATH', dest='file', default=None, help="Run script which enters your file")
-  argv_parser.add_argument("-r", "--rows", action="store_true", dest='file_by_rows', default=False, help="Split file by rows and make link for each within (max 30 rows)")
+  argv_parser.add_argument("-s", "--split-lines", action="store_true", dest='split_lines', default=False, help="Split by lines and make link for each within (max 30 rows)")
+
+  argv_parser.add_argument("stdin_text", nargs='?', default='', metavar='SOME TEXT')
 
   argv_parser.add_argument("-o", "--outfile", action="store", metavar='FILE PATH', dest='outfile', default=None, help="Saves the info to the specified file")
   argv_parser.add_argument("-k", "--keysize", action="store", metavar='PASSWORD LENGTH', dest="keysize", type=int, default=9, help="Set secret password length for password generator.")
@@ -43,8 +45,16 @@ def get_args(args=None):
     # cross_input()
     sys.exit(0)
 
-  if ((not args.file is None) and os.path.exists(args.file)) and len(args.text) > 0:
-    print("* WARNING: You must use one from specified types: only by `text` or only by `file`. Look to help (--help, -h) for more info.")
+  if args.file is None and len(args.text) == 0:
+    if not os.isatty(sys.stdin.fileno()):
+      args.text = sys.stdin.read()
+    else:
+      args.text = args.stdin_text
+      args.stdin_text = ''
+
+  if sum([not args.file is None, len(args.text) > 0, len(args.stdin_text) > 0]) > 1:
+    print([not args.file is None, len(args.text) > 0, len(args.stdin_text) > 0])
+    print("* WARNING: You must use one from specified types: only by `text`, by `file` or by script stdin. Look to help (--help, -h) for more info.")
     # print("Please, press [Enter] for exit...")
     # cross_input()
     sys.exit(-1)

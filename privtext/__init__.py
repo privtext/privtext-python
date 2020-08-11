@@ -29,8 +29,8 @@ class PrivateText:
 
     # http(s) address, where service is locate
     self._net_domain = "https://privtext.com"
-    #max count of lines in file, what can be imported to the system
-    self._file_max_lines = 30
+    #max lines, what can process by one run
+    self._max_process_lines = 30
     #length for string, what use as private client key
     self._publick_key_size = keysize
     #max size in Mb, what service server can get from request
@@ -48,7 +48,7 @@ class PrivateText:
     #path for imported file, what can client set
     self.inputfile = inputfile
     #split file by rows and make link for each within
-    self.file_by_rows = False
+    self.split_lines = False
     #just text, what can client set
     self.text = text
     
@@ -95,7 +95,7 @@ class PrivateText:
 
 
   #send data to service and get private url
-  def _makeprivate(self, text, file_line_num=None):
+  def _makeprivate(self, text):
     note, secure_key = self._encryptNote(text)
 
     if self.debug_mode:
@@ -231,23 +231,31 @@ class PrivateText:
   #public function, what run process for use service
   def send(self):
     if len(self.text):
-      self._makeprivate(self.text)
+      if self.split_lines:
+        lines = self.text.split('\n')
+        if len(lines) > self._max_process_lines:
+          print("* WARNING: Input file has more than max limit lines for file")
+        else:
+          for line in lines:
+            self._makeprivate(line)
+      else:
+        self._makeprivate(self.text)
 
     if not self.inputfile is None:
       if os.path.exists(self.inputfile):
 
-        if self.file_by_rows:
+        if self.split_lines:
           lines = []
           try:
             lines = [line for line in open(self.inputfile, 'r')]
           except IOError as e:
             print("* WARNING: I/O error({0})\n".format(str(e)))
           
-          if len(lines) > self._file_max_lines:
+          if len(lines) > self._max_process_lines:
             print("* WARNING: Input file has more than max limit lines for file")
           else:
-            for lineid in range(0,len(lines)):
-              self._makeprivate(lines[lineid], file_line_num=lineid)
+            for line in lines:
+              self._makeprivate(line)
         else:
           with open(self.inputfile, 'r') as fir:
             self._makeprivate(fir.read())
