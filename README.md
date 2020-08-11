@@ -1,6 +1,6 @@
 # privtext-python
 
-A tool for creating create your private note by Privtext.
+A command line utility to create private texts on privtext.com
 
  - [Installation and documentation] (https://privtext.com/soft.html)
  - [Issues](https://github.com/privtext/privtext-python/issues)
@@ -11,3 +11,4 @@ A tool for creating create your private note by Privtext.
 
 Everyone interacting in the privtext project's codebases, issue trackers, chat rooms, and mailing lists is expected to
 follow the [PSF Code of Conduct](https://github.com/pypa/.github/blob/main/CODE_OF_CONDUCT.md).
+нит
