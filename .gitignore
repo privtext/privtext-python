@@ -1,8 +1,8 @@
-.DS_Store
-*.yaml
 *.pyc
-.secrets/*.*
 .idea/*.*
-dist/
+local/
 build/
-privtext.egg-info/
+dist/
+privtext.*/
+.gitignore
+.DS_Store
