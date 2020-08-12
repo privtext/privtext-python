@@ -26,11 +26,12 @@ def get_args(args=None):
             -------------------------\n\
             * NOTE: If you pass text as command line argument, do  not forget
             to encapsulate it into "".
-
+            
             Check out https://github.com/privtext/privtext-python
             -------------------------"""),
     add_help=True
   )
+  #argv_parser.add_argument("-t", "--text", action="store", metavar='SOME TEXT', dest='text', default='', help="Run script with your text.")
   argv_parser.add_argument("-f", "--file", action="store", metavar='FILE PATH', dest='file', default=None, help="Get input text from file rather than from argument or piped input.")
   argv_parser.add_argument("-s", "--split-lines", action="store_true", dest='split_lines', default=False, help="Split text line by line and make a separate privtext for each line.")
 
@@ -51,17 +52,24 @@ def get_args(args=None):
   if args.file is None and len(args.text) == 0:
     if not os.isatty(sys.stdin.fileno()):
       args.text = sys.stdin.read()
+  #if sum([not args.file is None, len(args.text) > 0, len(args.stdin_text) > 0]) > 1:
   if args.file and args.text:
+    #print([not args.file is None, len(args.text) > 0, len(args.stdin_text) > 0])
     print("ERROR! Only ONE text source can be specified. Either piped input, command line argument, or file. `privtext --help` for more info.")
     sys.exit(-1)
   elif not args.file and not args.text:
     argv_parser.print_help()
     sys.exit(0)
+    #  if not ((not args.file is None) and os.path.exists(args.file)) and len(args.text) == 0:
+    #print("You run programm like double click or pressed `Enter`.\nFor more detaile run from terminal (command line) `privtext -h` or `privtext --help`\n")
+    #print("For now, you must enter needed string: ")
+    #args.text = cross_input()
 
+  #if user set key size, than ArgumentParser will return list with one element
   if isinstance(args.keysize, list):
     args.keysize = args.keysize[0]
 
-  #if user set lifetime, then ArgumentParser will return list with one element
+  #if user set lifetime, than ArgumentParser will return list with one element
   if isinstance(args.lifetime, list):
     args.lifetime = args.lifetime[0]
 

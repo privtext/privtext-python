@@ -1,0 +1,12 @@
+README.md
+setup.py
+privtext/__init__.py
+privtext/__main__.py
+privtext/args.py
+privtext/env.py
+privtext/utils.py
+privtext.egg-info/PKG-INFO
+privtext.egg-info/SOURCES.txt
+privtext.egg-info/dependency_links.txt
+privtext.egg-info/requires.txt
+privtext.egg-info/top_level.txt
