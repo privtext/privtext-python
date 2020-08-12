@@ -1,12 +1,6 @@
-# ignore the app.yaml, as it contains secret API keys.
-# example should be maintained at app.yaml.template
-*.yaml
 .DS_Store
-
-# ignore compiled python files
+*.yaml
 *.pyc
-
-# ignore all files in .secrets/ directory
 .secrets/*.*
 .idea/*.*
 dist/
