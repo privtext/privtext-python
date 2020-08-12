@@ -8,11 +8,17 @@ try:
 except ImportError:
     from distutils.core import setup, find_packages
 
+with open("README.md", "r") as fh:
+  long_description = fh.read()
+
 setup(
     name='privtext',
-    version='2.1.2',
+    version='2.1.3',
     
     description='A tool for creating create your private',
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    
     author='Privtext Tech.',
     author_email='tech@privtext.com',
     url='https://github.com/privtext/privtext-python',
