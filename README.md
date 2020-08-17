@@ -2,6 +2,12 @@
 
 A command line utility to create private text messages on privtext.com. A must have utility for sys admins.
 
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/9GYRzT3mYsc" 
+frameborder="0" 
+allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+allowfullscreen></iframe>
+
 # Install
 
 ```bash
