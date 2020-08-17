@@ -31,10 +31,10 @@ Safely share your secrets in chats, emails, and social networks. Never send your
 
 # Links
 
- - [Installation and documentation](https://privtext.com/soft.html)
- - [Issues](https://github.com/privtext/privtext-python/issues)
+ - [PrivText,com - privtext on the Web](https://privtext.com/)
  - [PyPI](https://pypi.org/project/privtext)
  - [Github](https://github.com/privtext/privtext-python)
+ - [Issues](https://github.com/privtext/privtext-python/issues)
  
 ## Code of Conduct
 
