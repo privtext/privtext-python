@@ -2,19 +2,7 @@
 
 A command line utility to create private text messages on privtext.com. A must have utility for sys admins.
 
-
-https://img.youtube.com/vi/9GYRzT3mYsc/hqdefault.jpg
-
 [![PrivText command line utility: basic usage](https://img.youtube.com/vi/9GYRzT3mYsc/0.jpg)](https://www.youtube.com/watch?v=9GYRzT3mYsc "Everything Is AWESOME")
-
-
-
-
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/9GYRzT3mYsc" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
 
 # Install
 
