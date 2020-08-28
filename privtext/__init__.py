@@ -61,6 +61,8 @@ class PrivateText:
     #customer time live for your note.
     timelive_switcher = { 'afterread': 0, '1hour': 3600, '1day':  86400, '3days': 259200, '1week': 604800, '1month': 2592000, '1year': 31104000 }
     self.timelive = timelive_switcher[timelive]
+
+    self.noteid = None
     
     
     #e-mail to notify when note is destroyed.
@@ -228,6 +230,128 @@ class PrivateText:
     note = cross_decode(base64.b64encode(cross_encode('Salted__') + salt + encrypted))
     return (note, passwd)
 
+  def _decryptNote(self, note, passwd):
+    note = base64.b64decode(note)
+    salt, note = note[8:16], note[16:]
+
+    salted, dx = cross_encode(''), cross_encode('')
+    block_length = AES.block_size
+
+    key_length = int(256 / 8)
+    
+    salted_length = key_length + block_length
+    while len(salted) < salted_length:
+      m = hashlib.new('md5')
+      m.update(dx + cross_encode(passwd) + salt)
+      dx = m.digest()
+      salted += dx
+    key = salted[0: key_length]
+    iv = salted[key_length: key_length + block_length]
+
+    if self.debug_mode == 3:
+      print ({
+        'key_length': key_length,
+        'block_length': block_length,
+        'salted_length': salted_length,
+        'salted': str(len(salted)),
+        'key': str(len(key)),
+        'iv': str(len(iv))
+      })
+
+    unpad = lambda s: s[:-ord(s[len(s)-1:])]
+
+    crpt = AES.new(key, AES.MODE_CBC, iv)
+    plaintext = crpt.decrypt(note)
+
+    return cross_decode(unpad(plaintext))
+
+
+  def read(self):
+    if os.path.exists(self._cookies_file_path):
+      os.remove(self._cookies_file_path)
+
+    cj = cookielib.LWPCookieJar(self._cookies_file_path)
+    url = self._net_domain + "/api/note"
+
+    sdata = {'action': 'read_notedata', 'noteid': self.noteid, 'ajax': 1}
+    
+    if self.debug_mode:
+      print("Request url: ", url)
+      print("Send data: ", sdata)
+
+    try:
+      response = requests.post(url, data=sdata, cookies=cj)
+      response_answ = json.loads(response.text)
+    except urllib2.URLError as e:
+      # print("* WARNING: Request to server error: {0}\nPlease, try later.\nExit.".format("SSL certificate verify failed"))
+      print("* WARNING: Request error {0} ({1})\n".format(url, str(e)))
+      sys.exit(-2)
+    
+    if not (response_answ['ajax_status'] == 'ok' and response_answ['note_id'] == self.noteid):
+      print('Error: The note not found or destroyed.')
+      sys.exit(0)
+    else:
+
+      url = self._net_domain + "/api/proof"
+
+      if self.debug_mode:
+        print("Request url: " + url)
+      
+      try:
+        response = requests.post(url, data={'action':'get_proof_password', 'ajax':1}, cookies=cj)
+        response_answ = response.text
+      except urllib2.URLError as e:
+        # print("* WARNING: Request to server error: {0}\nPlease, try later.\nExit.".format("SSL certificate verify failed"))
+        print("* WARNING: Request error {0} ({1})\n".format(url, str(e)))
+        sys.exit(-2)
+
+      if self.debug_mode:
+        print("Response: " + response_answ)
+
+      content = json.loads(response_answ)
+
+      if content['algorithm'] == 'sha256':
+        proof = self._miner(content['prefix'], content['target'])
+
+        if self.debug_mode:
+          print("Maked proof: " + proof)
+
+        url = self._net_domain + "/api/note"
+        sdata = {'action': 'read_note', 'noteid': self.noteid, 'proof':proof, 'ajax': 1}
+      
+        if self.debug_mode:
+          print("Request url: ", url)
+          print("Send data: ", sdata)
+
+        try:
+          response = requests.post(url, data=sdata, cookies=cj)
+          response_answ = json.loads(response.text)
+        except urllib2.URLError as e:
+          # print("* WARNING: Request to server error: {0}\nPlease, try later.\nExit.".format("SSL certificate verify failed"))
+          print("* WARNING: Request error {0} ({1})\n".format(url, str(e)))
+          sys.exit(-2)
+
+        text = self._decryptNote(response_answ['note'], self.password)
+        self.outtext.append(text)
+
+        if text is None or len(text) == 0:
+          print("Error: wrong decrypt password\n")
+          sys.exit(-2)
+
+        sdata = {'action': 'delete_note', 'noteid': self.noteid, 'proof':proof, 'ajax': 1}
+        if self.debug_mode:
+          print("Request url: ", url)
+          print("Send data: ", sdata)
+
+        try:
+          response = requests.post(url, data=sdata, cookies=cj)
+          response_answ = json.loads(response.text)
+        except urllib2.URLError as e:
+          # print("* WARNING: Request to server error: {0}\nPlease, try later.\nExit.".format("SSL certificate verify failed"))
+          print("* WARNING: Request error {0} ({1})\n".format(url, str(e)))
+          sys.exit(-2)
+
+
   #public function, what run process for use service
   def send(self):
     if len(self.text):
@@ -265,6 +389,10 @@ class PrivateText:
   #dinamic save needed properties
   def set(self, name, value):
     self.__dict__[name] = value
+
+  #dinamic get needed properties
+  def get(self, name):
+    return self.__dict__.get(name, None)
 
   #start output results to client / in print to console or save in file
   def printout(self):

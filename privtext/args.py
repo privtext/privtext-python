@@ -45,7 +45,7 @@ def get_args(args=None):
   args = argv_parser.parse_args(args=args)
 
   if args.version:
-    print("Version 2.1.3. Built Wed Aug 12 12:50")
+    print("Version 2.2.0. Built Wed Aug 25 11:30")
     sys.exit(0)
 
   if args.file is None and len(args.text) == 0:

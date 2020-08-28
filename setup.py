@@ -13,7 +13,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='privtext',
-    version='2.1.3',
+    version='2.2.0',
     
     description='A tool for creating create your private',
     long_description=long_description,
