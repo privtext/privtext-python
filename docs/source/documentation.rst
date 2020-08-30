@@ -1,6 +1,6 @@
 
-privtext usage docummntation
-====================================
+privtext usage documentation
+============================
 
 By default once the message is read by recepient it is deleted by the server. Commmand line options let you set different expiration rules too.
 
