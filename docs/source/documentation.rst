@@ -7,7 +7,7 @@ By default once the message is read by recepient it is deleted by the server. Co
 Usage
 -----
 
-Simple example
+### Simple example
 
 .. code-block:: console
 
@@ -39,7 +39,8 @@ or
 
     python -m privtext "https://privtext.com/R8MnvR#BKWrZhG81"
 
-Privtext a file
+
+### Privtext a file
 
 
 .. code-block:: console
